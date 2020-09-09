@@ -1,0 +1,10 @@
+## CARPETAS ##
+pruebas_itm/
+Arte_Actas/
+Arte_Diplomas/
+
+## I hate you Apple ##
+.DS_store
+
+## ENVIROMENT VARIABLES ##
+.env

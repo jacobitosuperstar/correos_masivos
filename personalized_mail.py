@@ -2,6 +2,7 @@ import smtplib
 import imghdr
 from email.message import EmailMessage
 import csv
+import os
 
 with open("prueba.csv") as csv_file:
     csv_reader = csv.reader(csv_file, delimiter=",")
@@ -18,9 +19,10 @@ with open("prueba.csv") as csv_file:
 
 for documento,correo,nombres,apellidos in datos:
 
-    # exchange Sign In
-    exchange_sender = "becassapiencia@itm.edu.co"
-    exchange_passwd = "Seguimiento2018"
+    ## SIGN IN ##
+    EMAIL_SENDER = os.environ["EMAIL_SENDER"]
+    EMAIL_PASSWORD = os.environ["EMAIL_PASSWORD"]
+    server = smtplib.SMTP(os.environ["EMAIL_HOST"],587)
 
     msg = EmailMessage()
     msg["from"] = exchange_sender
@@ -54,10 +56,9 @@ for documento,correo,nombres,apellidos in datos:
 #
 #        msg.add_attachment(file_data, maintype="image", subtype=file_type, filename=file_name)
 
-    server = smtplib.SMTP("smtp.office365.com",587)
     server.ehlo()
     server.starttls()
-    server.login(exchange_sender, exchange_passwd)
+    server.login(EMAIL_SENDER, EMAIL_PASSWORD)
 
     try:
         server.send_message(msg)
