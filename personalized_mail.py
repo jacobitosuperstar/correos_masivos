@@ -4,8 +4,8 @@ from email.message import EmailMessage
 import csv
 import os
 
-with open("prueba.csv") as csv_file:
-    csv_reader = csv.reader(csv_file, delimiter=",")
+with open("pruebas_itm/CSV_de_prueba.csv") as csv_file:
+    csv_reader = csv.reader(csv_file, delimiter=";")
     next(csv_reader)
     datos = list(csv_reader)
 
@@ -17,7 +17,7 @@ with open("prueba.csv") as csv_file:
 
 #print(correos_list[5])
 
-for documento,correo,nombres,apellidos in datos:
+for Nombre,Correo,Documento in datos:
 
     ## SIGN IN ##
     EMAIL_SENDER = os.environ["EMAIL_SENDER"]
@@ -25,16 +25,16 @@ for documento,correo,nombres,apellidos in datos:
     server = smtplib.SMTP(os.environ["EMAIL_HOST"],587)
 
     msg = EmailMessage()
-    msg["from"] = exchange_sender
-    msg["subject"] = 'comunicado Becas Tecnologías Alcaldía de Medellín'
-    msg["Bcc"] = correo
+    msg["from"] = EMAIL_SENDER
+    msg["subject"] = 'Correo de prueba para el envio de información dinámico'
+    msg["Bcc"] = Correo
 
     ### ESTE ES EL CUERPO DEL COMUNICADO QUE VAMOS A ENVIAR ###
-    msg.set_content(f"Hola, {nombres} {apellidos} Este es el correo de prueba para probar el envío de contenido dinámico.")
+    msg.set_content(f"Hola, {Nombre} Este es el correo de prueba para probar el envío de contenido dinámico.")
 
     ### ESTE ES LO QUE SE VA A HACER PARA AGREGAR PDFs A LOS CORREOS ###
-    file_acta=f"{documento}_acta.pdf"
-    file_diploma=f"{documento}_diploma.pdf"
+    file_acta=f"pruebas_itm/Arte_Actas/{Documento}.pdf"
+    file_diploma=f"pruebas_itm/Arte_Diplomas/{Documento}.pdf"
     files = [file_acta,file_diploma]
 
     for file in files:
@@ -62,7 +62,9 @@ for documento,correo,nombres,apellidos in datos:
 
     try:
         server.send_message(msg)
-        print (f"email sent to {nombres}")
+        print (f"email sent to {Nombre}")
     except:
-        print (f"error sending mail {nombres}")
+        print (f"error sending mail {Nombre}")
     server.quit()
+
+print("Finalizado el envío de información de prueba")
