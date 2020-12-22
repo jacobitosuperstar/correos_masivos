@@ -30,7 +30,7 @@ for Programa,Nombre,Correo,Documento in datos:
     msg["Bcc"] = Correo
 
     ### ESTE ES EL CUERPO DEL COMUNICADO QUE VAMOS A ENVIAR ###
-    msg.set_content(f"Hola, {Nombre} Este es el correo de prueba para probar el envío de contenido dinámico.")
+    msg.set_content(f"")
 
     ### ESTE ES LO QUE SE VA A HACER PARA AGREGAR PDFs A LOS CORREOS ###
     file_acta=f"../Acta{Documento}.pdf"
