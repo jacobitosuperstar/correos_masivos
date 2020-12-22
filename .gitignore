@@ -1,7 +1,11 @@
 ## CARPETAS ##
-pruebas_itm/
-Arte_Actas/
-Arte_Diplomas/
+
+## Archivos ##
+*.csv
+*.xlsx
+*.pdf
+*.png
+*.jpg
 
 ## I hate you Apple ##
 .DS_store
