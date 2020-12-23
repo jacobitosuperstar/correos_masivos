@@ -4,7 +4,7 @@ from email.message import EmailMessage
 import csv
 import os
 
-with open("dos_pm.csv") as csv_file:
+with open("cuatro_pm.csv") as csv_file:
     csv_reader = csv.reader(csv_file, delimiter=";")
     next(csv_reader)
     datos = list(csv_reader)
